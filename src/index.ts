@@ -1,13 +1,25 @@
 import express from "express";
-import { Request, Response } from "express";
+import mongoose from "mongoose";
+import { json } from "body-parser";
+import { todoRouter } from "./routes/todo.route";
+import { productsRouter } from "./routes/products.route";
 
 const app = express();
-const port = 3000;
+app.use(json());
+app.use(todoRouter);
+app.use(productsRouter);
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World!");
-});
+mongoose.connect("mongodb://localhost:27017/ecoscoredb").then(
+  () => {
+    console.log("Connexion à la base de données réussie !");
+  },
+  (err) => {
+    console.log(`Erreur lors de la connexion ${err}`);
+  }
+);
+
+const port: Number = 3000;
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Server is listening on port ${port}`);
 });
