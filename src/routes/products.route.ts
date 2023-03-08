@@ -32,3 +32,4 @@ router.post("/products", async (req: Request, res: Response) => {
 });
 
 export { router as productsRouter };
+
