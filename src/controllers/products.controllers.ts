@@ -20,15 +20,14 @@ export async function create(req: Request, res: Response) {
     res.sendStatus(406);
   } else {
     createProduct(req);
-    res.send("Ressource Created Succesfully !");
+    res.send("Ressource created succesfully.");
   }
 }
 
 export async function update(req: Request, res: Response) {
   const findOne = await Products.find({ where: { id: req.params._id } });
-  // console.log(req.params.id);
   if (!findOne) {
-    res.send("Marche pas");
+    res.sendStatus(406);
   } else {
     updateProduct(req);
     res.send("Ressource updated successfully.");
