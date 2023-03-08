@@ -1,4 +1,5 @@
 export default interface Iproducts {
+  save: any;
   title: string;
   type: string;
   image: string;
