@@ -25,3 +25,27 @@ export const createProduct = async (req: Request) => {
   });
   return await productModelInterface.save();
 };
+
+// Service pour mettre à jour un produit de la table [Product] par id
+export const updateProduct = async (req: Request) => {
+  const {
+    title,
+    type,
+    image,
+    scoreRecycled,
+    scoreEnergy,
+    scoreCarbon,
+    scoreRepair,
+  } = req.body;
+  const update = await Products.updateOne({ _id : req.params.id },{
+    title,
+    type,
+    image,
+    scoreRecycled,
+    scoreEnergy,
+    scoreCarbon,
+    scoreRepair,
+  })
+  .catch(() => false);
+  return update;
+};
