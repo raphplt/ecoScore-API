@@ -1,8 +1,12 @@
 import { Request, Response } from "express";
 import Products from "../models/products.models";
-import { createProduct, updateProduct } from "../services/product.services";
+import {
+  createProduct,
+  deleteProduct,
+  updateProduct,
+} from "../services/product.services";
 
-export async function getAll(req: Request, res: Response) {
+export async function getAllController(req: Request, res: Response) {
   try {
     const findAll = await Products.find();
     if (!findAll) {
@@ -15,7 +19,7 @@ export async function getAll(req: Request, res: Response) {
   }
 }
 
-export async function create(req: Request, res: Response) {
+export async function createController(req: Request, res: Response) {
   if (!req.body) {
     res.sendStatus(406);
   } else {
@@ -24,12 +28,22 @@ export async function create(req: Request, res: Response) {
   }
 }
 
-export async function update(req: Request, res: Response) {
+export async function updateController(req: Request, res: Response) {
   const findOne = await Products.find({ where: { id: req.params._id } });
   if (!findOne) {
     res.sendStatus(406);
   } else {
     updateProduct(req);
-    res.send("Ressource updated successfully.");
+    res.send(`Ressource ${req.body.title} updated successfully.`);
+  }
+}
+
+export async function deleteController(req: Request, res: Response) {
+  const findOne = await Products.find({ where: { id: req.params._id } });
+  if (!findOne) {
+    res.sendStatus(406);
+  } else {
+    deleteProduct(req);
+    res.send(`Ressource deleted successfully.`);
   }
 }

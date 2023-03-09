@@ -1,17 +1,25 @@
 import express, { NextFunction, Request, Response } from "express";
-import { create, getAll, update } from "../controllers/products.controllers";
+import {
+  createController,
+  getAllController,
+  updateController,
+  deleteController,
+} from "../controllers/products.controllers";
 
 // Instantiation du routeur
 const router = express.Router();
 
 // Route to get all products
-router.get("/", getAll);
+router.get("/", getAllController);
 
 // Route to create a product
-router.post("/", create);
+router.post("/", createController);
 
 // Route to update a product
-router.put("/:id", update);
+router.put("/:id", updateController);
+
+// Route to delete a product
+router.delete("/:id", deleteController);
 
 // middleware pour gérer les erreurs
 router.use((err: Error, req: Request, res: Response, next: NextFunction) => {
