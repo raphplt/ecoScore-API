@@ -1,9 +1,11 @@
 export default interface Iproducts {
   save: any;
   title: string;
-  type: string;
   image: string;
-  scoreRecycled: boolean;
+  brand: string;
+  category: string;
+  subcategory: string;
+  isRecycled: boolean;
   scoreEnergy: number;
   scoreCarbon: number;
   scoreRepair: number;

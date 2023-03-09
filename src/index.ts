@@ -12,7 +12,7 @@ app.use(todoRouter);
 
 app.use("/products", productsRouter);
 
-mongoose.connect("mongodb://localhost:27017/ecoscoredb").then(
+mongoose.connect("mongodb://127.0.0.1:27017/ecoscoredb").then(
   () => {
     console.log("Connexion à la base de données réussie !");
   },

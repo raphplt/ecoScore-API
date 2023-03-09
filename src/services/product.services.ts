@@ -6,9 +6,11 @@ import { Request } from "express";
 export const createProduct = async (req: Request) => {
   const {
     title,
-    type,
     image,
-    scoreRecycled,
+    brand,
+    category,
+    subcategory,
+    isRecycled,
     scoreEnergy,
     scoreCarbon,
     scoreRepair,
@@ -16,9 +18,11 @@ export const createProduct = async (req: Request) => {
 
   const productModelInterface: Iproducts = new Products({
     title,
-    type,
     image,
-    scoreRecycled,
+    brand,
+    category,
+    subcategory,
+    isRecycled,
     scoreEnergy,
     scoreCarbon,
     scoreRepair,
@@ -30,18 +34,22 @@ export const createProduct = async (req: Request) => {
 export const updateProduct = async (req: Request) => {
   const {
     title,
-    type,
     image,
-    scoreRecycled,
+    brand,
+    category,
+    subcategory,
+    isRecycled,
     scoreEnergy,
     scoreCarbon,
     scoreRepair,
   } = req.body;
   const update = await Products.updateOne({ _id : req.params.id },{
     title,
-    type,
     image,
-    scoreRecycled,
+    brand,
+    category,
+    subcategory,
+    isRecycled,
     scoreEnergy,
     scoreCarbon,
     scoreRepair,

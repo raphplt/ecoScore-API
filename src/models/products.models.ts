@@ -9,9 +9,11 @@ interface productModelInterface extends mongoose.Model<ProductsDoc> {
 // Interface for the document
 interface ProductsDoc extends mongoose.Document {
   title: string;
-  type: string;
   image: string;
-  scoreRecycled: boolean;
+  brand: string;
+  category: string;
+  subcategory: string;
+  isRecycled: boolean;
   scoreEnergy: number;
   scoreCarbon: number;
   scoreRepair: number;
@@ -22,15 +24,23 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  type: {
-    type: String,
-    required: true,
-  },
   image: {
     type: String,
     required: true,
   },
-  scoreRecycled: {
+  brand: {
+    type: String,
+    required: true,
+  },
+  category: {
+    type: String,
+    required: true,
+  },
+  subcategory: {
+    type: String,
+    required: true,
+  },
+  isRecycled: {
     type: Boolean,
     required: true,
   },
