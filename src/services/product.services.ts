@@ -49,3 +49,10 @@ export const updateProduct = async (req: Request) => {
   .catch(() => false);
   return update;
 };
+
+// Service to delete a product of [Product] table by id
+export const deleteProduct = async (req: Request) => {
+  const findOne = await Products.findByIdAndDelete( req.params.id
+  ).catch(() => false);;
+  return findOne
+};
