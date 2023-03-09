@@ -1,5 +1,5 @@
 import express, { NextFunction, Request, Response } from "express";
-import { create, getAll } from "../controllers/products.controllers";
+import { create, getAll, getById } from "../controllers/products.controllers";
 import Iproducts from "../interfaces/products.interface";
 import Products from "../models/products.models";
 
@@ -10,6 +10,13 @@ router.get("/", getAll);
 
 // Route to create a product
 router.post("/", create);
+
+// Route to find a product 
+router.get('/:id', getById);
+
+// Route to delete a product 
+//router.delete('/:id', authenticateJWT, deleteById);
+
 
 // middleware pour gérer les erreurs
 router.use((err: Error, req: Request, res: Response, next: NextFunction) => {

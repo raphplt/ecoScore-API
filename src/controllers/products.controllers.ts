@@ -23,3 +23,20 @@ export async function create(req: Request, res: Response) {
     res.send("Ressource Created Succesfully !");
   }
 }
+
+// permet chercher un objet dans la table Products en fonction de sont Id
+export async function getById(req: Request, res: Response) {
+  const findOne = await Products.findOne({where: {id:req.params.id}}).catch(() => {
+    res.sendStatus(400);
+  });
+  res.status(200).send(findOne);
+}
+
+//  suprime un objet dans la table products
+//export async function deleteById(req: Request, res: Response) {
+  //const query = await deleteProduct(req);
+  //if (query === false) { res.sendStatus(400); } else { res.sendStatus(200); }
+//}
+
+
+
