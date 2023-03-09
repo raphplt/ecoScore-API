@@ -1,35 +1,69 @@
 import { Request, Response } from "express";
 import Products from "../models/products.models";
-import { createProduct } from "../services/product.services";
+import {
+  createProduct,
+  deleteProduct,
+  updateProduct,
+} from "../services/product.services";
 
-export async function getAll(req: Request, res: Response) {
+export async function getAllController(req: Request, res: Response) {
   try {
     const findAll = await Products.find();
     if (!findAll) {
       res.status(404);
     } else {
-      res.send(JSON.stringify(findAll));
+      res.send(findAll);
     }
   } catch (error) {
     return res.status(404).send(error);
   }
 }
 
-export async function create(req: Request, res: Response) {
+export async function createController(req: Request, res: Response) {
   if (!req.body) {
     res.sendStatus(406);
   } else {
     createProduct(req);
-    res.send("Ressource Created Succesfully !");
+    res.send("Ressource created succesfully.");
+  }
+}
+
+export async function updateController(req: Request, res: Response) {
+  const findOne = await Products.find({ where: { id: req.params._id } });
+  if (!findOne) {
+    res.sendStatus(406);
+  } else {
+    updateProduct(req);
+    res.send(`Ressource ${req.body.title} updated successfully.`);
+  }
+}
+
+export async function deleteController(req: Request, res: Response) {
+  const findOne = await Products.find({ where: { id: req.params._id } });
+  if (!findOne) {
+    res.sendStatus(406);
+  } else {
+    deleteProduct(req);
+    res.send(`Ressource deleted successfully.`);
   }
 }
 
 // permet chercher un objet dans la table Products en fonction de sont Id
 export async function getById(req: Request, res: Response) {
-  const findOne = await Products.findOne({where: {id:req.params.id}}).catch(() => {
-    res.sendStatus(400);
-  });
-  res.status(200).send(findOne);
+  try {
+    console.log('1')
+    const findOne = await Products.find({ title: req.body.title }).exec();
+    if (findOne === null) {
+      console.log('2')
+      return res.status(404);
+    } else {
+      console.log('3')
+      return res.send(findOne);
+    }
+  } catch (error) {
+    console.log('4')
+    return res.status(404).send(error);
+  }
 }
 
 //  suprime un objet dans la table products

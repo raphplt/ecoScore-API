@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import Iproducts from "../interfaces/products.interface";
 
 interface productModelInterface extends mongoose.Model<ProductsDoc> {
+  update: any;
   build(attr: Iproducts): ProductsDoc;
 }
 
