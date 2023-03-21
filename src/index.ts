@@ -1,15 +1,24 @@
 import express from "express";
 import mongoose from "mongoose";
 import { json } from "body-parser";
-import { todoRouter } from "./routes/todo.route";
 import { productsRouter } from "./routes/products.routes";
+
+const cors = require("cors");
 
 const app = express();
 
 app.use(json());
 
-app.use(todoRouter);
+// Utilisation de CORS (pour permettre l'utilisation depuis un autre port)
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+    methods: ["GET", "POST"],
+  })
+);
 
+// Route produits
 app.use("/products", productsRouter);
 
 mongoose.connect("mongodb://localhost:27017/ecoscoredb").then(
@@ -21,7 +30,7 @@ mongoose.connect("mongodb://localhost:27017/ecoscoredb").then(
   }
 );
 
-const port: Number = 3000;
+const port: Number = 3001;
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
