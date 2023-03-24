@@ -12,7 +12,7 @@ app.use(json());
 // Utilisation de CORS (pour permettre l'utilisation depuis un autre port)
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000"],
     credentials: true,
     methods: ["GET", "POST"],
   })
@@ -30,7 +30,7 @@ mongoose.connect("mongodb://localhost:27017/ecoscoredb").then(
   }
 );
 
-const port: Number = 3001;
+const port: number = 3001;
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
