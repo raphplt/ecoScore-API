@@ -42,7 +42,7 @@ const productSchema = new mongoose.Schema({
   },
   isRecycled: {
     type: Boolean,
-    required: true,
+    required: false,
   },
   scoreEnergy: {
     type: Number,
@@ -54,7 +54,7 @@ const productSchema = new mongoose.Schema({
   },
   scoreRepair: {
     type: Number,
-    required: true,
+    required: false,
   },
 });
 
