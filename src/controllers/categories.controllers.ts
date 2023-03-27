@@ -1,16 +1,16 @@
 import { Request, Response } from "express";
-import Products from "../models/categories.model";
+import Category from "../models/categories.model";
 import {
-  createProduct,
-  deleteProduct,
-  updateProduct,
-} from "../services/product.services";
+  createCategory,
+  deleteCategory,
+  updateCategory,
+} from "../services/category.services";
 
 export async function getAllController(req: Request, res: Response) {
   try {
-    const findAll = await Products.find();
+    const findAll = await Category.find();
     if (!findAll) {
-      res.status(404).send("No product found.");
+      res.status(404).send("No category found.");
     } else {
       res.send(findAll);
     }
@@ -23,39 +23,39 @@ export async function createController(req: Request, res: Response) {
   if (!req.body) {
     res.sendStatus(406);
   } else {
-    createProduct(req);
+    createCategory(req);
     res.send("Ressource created succesfully.");
   }
 }
 
 export async function updateController(req: Request, res: Response) {
-  const findOne = await Products.find({ where: { id: req.params._id } });
+  const findOne = await Category.find({ where: { id: req.params._id } });
   if (!findOne) {
     res.sendStatus(406);
   } else {
-    updateProduct(req);
+    updateCategory(req);
     res.send(`Ressource ${req.body.title} updated successfully.`);
   }
 }
 
 export async function deleteController(req: Request, res: Response) {
-  const findOne = await Products.find({ where: { id: req.params._id } });
+  const findOne = await Category.find({ where: { id: req.params._id } });
   if (!findOne) {
     res.sendStatus(406);
   } else {
-    deleteProduct(req);
+    deleteCategory(req);
     res.send(`Ressource deleted successfully.`);
   }
 }
 
 export async function search(req: Request, res: Response) {
-   const { query } = req.query;
+  const { query } = req.query;
 
-   // Effectue une recherche dans la base de données en fonction des critères spécifiés
-   const results = await Products.find({ title: query });
+  // Effectue une recherche dans la base de données en fonction des critères spécifiés
+  const results = await Category.find({ cat: query });
 
-   // Renvoie les résultats de la recherche au client
-   res.json(results);
+  // Renvoie les résultats de la recherche au client
+  res.json(results);
 }
 
 // permet chercher un objet dans la table Products en fonction de son Id
@@ -78,8 +78,6 @@ export async function search(req: Request, res: Response) {
 
 //  suprime un objet dans la table products
 //export async function deleteById(req: Request, res: Response) {
-  //const query = await deleteProduct(req);
-  //if (query === false) { res.sendStatus(400); } else { res.sendStatus(200); }
+//const query = await deleteProduct(req);
+//if (query === false) { res.sendStatus(400); } else { res.sendStatus(200); }
 //}
-
-

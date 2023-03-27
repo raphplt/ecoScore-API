@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import { json } from "body-parser";
 import { productsRouter } from "./routes/products.routes";
+import { categoriesRouter } from "./routes/categories.routes";
 
 const cors = require("cors");
 
@@ -21,6 +22,9 @@ app.use(
 
 // Route produits
 app.use("/products", productsRouter);
+
+// Route categories
+app.use("/categories", categoriesRouter);
 
 mongoose.connect("mongodb://localhost:27017/ecoscoredb").then(
   () => {

@@ -1,5 +1,5 @@
 import Iproducts from "../interfaces/products.interface";
-import Products from "../models/products.models";
+import Products from "../models/products.model";
 import { Request } from "express";
 
 //Service to create a new product

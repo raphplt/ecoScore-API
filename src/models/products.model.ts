@@ -49,12 +49,12 @@ const productSchema = new mongoose.Schema({
 });
 
 productSchema.statics.build = (attr: Iproducts) => {
-  return new Products(attr);
+  return new Product(attr);
 };
 
-const Products = mongoose.model<ProductsDoc, productModelInterface>(
+const Product = mongoose.model<ProductsDoc, productModelInterface>(
   "products",
   productSchema
 );
 
-export default Products;
+export default Product;
