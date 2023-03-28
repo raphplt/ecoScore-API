@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Products from "../models/categories.model";
+import Products from "../models/products.model";
 import {
   createProduct,
   deleteProduct,
