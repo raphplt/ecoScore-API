@@ -18,7 +18,7 @@ app.use(
     credentials: true,
     methods: ["GET", "POST"],
   })
-);
+);  
 
 // Route produits
 app.use("/products", productsRouter);

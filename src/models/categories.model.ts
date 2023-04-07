@@ -10,6 +10,7 @@ interface categoryModelInterface extends mongoose.Model<CategoriesDoc> {
 interface CategoriesDoc extends mongoose.Document {
   cat: string;
   subCat: Array<string>;
+  image: string;
 }
 
 const categorySchema = new mongoose.Schema({
@@ -21,6 +22,10 @@ const categorySchema = new mongoose.Schema({
     type: Array<string>,
     required: true,
   },
+  image: {
+    type: String,
+    required: false,
+  }
 });
 
 categorySchema.statics.build = (attr: Icategories) => {

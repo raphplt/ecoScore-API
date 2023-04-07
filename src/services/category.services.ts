@@ -5,23 +5,25 @@ import Category from "../models/categories.model";
 
 //Service to create a new product
 export const createCategory = async (req: Request) => {
-  const { cat, subCat } = req.body;
+  const { cat, subCat, image } = req.body;
 
   const categoryModelInterface = new Category({
     cat,
     subCat,
+    image
   });
   return await categoryModelInterface.save();
 };
 
 // Service pour mettre à jour un produit de la table [Product] par id
 export const updateCategory = async (req: Request) => {
-  const { cat, subCat } = req.body;
+  const { cat, subCat, image } = req.body;
   const update = await Categories.updateOne(
     { _id: req.params.id },
     {
       cat,
       subCat,
+      image
     }
   ).catch(() => false);
   return update;

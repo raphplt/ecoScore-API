@@ -52,7 +52,9 @@ export async function search(req: Request, res: Response) {
    const { query } = req.query;
 
    // Effectue une recherche dans la base de données en fonction des critères spécifiés
-   const results = await Products.find({ title: query });
+   const results = await Products.find({
+     $or: [{ title: query }, { type: query }],
+   });
 
    // Renvoie les résultats de la recherche au client
    res.json(results);
