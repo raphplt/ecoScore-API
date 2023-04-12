@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import { json } from "body-parser";
 import { productsRouter } from "./routes/products.routes";
 import { categoriesRouter } from "./routes/categories.routes";
+import { usersRouter } from "./routes/users.routes";
 
 const cors = require("cors");
 
@@ -18,13 +19,16 @@ app.use(
     credentials: true,
     methods: ["GET", "POST"],
   })
-);  
+);
 
 // Route produits
 app.use("/products", productsRouter);
 
 // Route categories
 app.use("/categories", categoriesRouter);
+
+// Route users
+app.use("/users", usersRouter);
 
 mongoose.connect("mongodb://localhost:27017/ecoscoredb").then(
   () => {
