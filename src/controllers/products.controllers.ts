@@ -49,16 +49,20 @@ export async function deleteController(req: Request, res: Response) {
 }
 
 export async function search(req: Request, res: Response) {
-   const { query } = req.query;
+  const { query }: any = req.query;
 
-   // Effectue une recherche dans la base de données en fonction des critères spécifiés
-   const results = await Products.find({
-     $or: [{ title: query }, { type: query }],
-   });
+  // Crée une expression régulière à partir de la chaîne de recherche
+  const regex = new RegExp(query, "i");
 
-   // Renvoie les résultats de la recherche au client
-   res.json(results);
+  // Effectue une recherche dans la base de données en fonction des critères spécifiés
+  const results = await Products.find({
+    $or: [{ title: { $regex: regex } }, { type: { $regex: regex } }],
+  });
+
+  // Renvoie les résultats de la recherche au client
+  res.json(results);
 }
+
 
 // permet chercher un objet dans la table Products en fonction de son Id
 // export async function getById(req: Request, res: Response) {

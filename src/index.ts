@@ -30,7 +30,7 @@ app.use("/categories", categoriesRouter);
 // Route users
 app.use("/users", usersRouter);
 
-mongoose.connect("mongodb://localhost:27017/ecoscoredb").then(
+mongoose.connect("mongodb://0.0.0.0:27017/ecoscoredb").then(
   () => {
     console.log("Connexion à la base de données réussie !");
   },
