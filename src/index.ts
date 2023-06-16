@@ -4,6 +4,7 @@ import { json } from "body-parser";
 import { productsRouter } from "./routes/products.routes";
 import { categoriesRouter } from "./routes/categories.routes";
 import { usersRouter } from "./routes/users.routes";
+const cookieSession = require("cookie-session");
 
 const cors = require("cors");
 
@@ -11,13 +12,24 @@ const app = express();
 
 app.use(json());
 
-// Utilisation de CORS (pour permettre l'utilisation depuis un autre port)
+// Utilisation de CORS
 app.use(
   cors({
     origin: ["http://localhost:3000"],
 
     credentials: true,
     methods: ["GET", "POST"],
+  })
+);
+
+// Cookies session
+app.use(
+  cookieSession({
+    name: "session",
+    secret: "secret", // A changer pour une variable d'environnement
+    // maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    // httpOnly: true,
+    // secure: false,
   })
 );
 

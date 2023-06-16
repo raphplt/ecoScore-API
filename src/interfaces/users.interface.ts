@@ -3,4 +3,5 @@ export default interface Iusers {
   username: string;
   email: string;
   password: string;
+  role: string;
 }

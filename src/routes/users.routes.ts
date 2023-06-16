@@ -5,7 +5,7 @@ import {
   updateController,
   deleteController,
   search,
-  // getById,
+  login,
 } from "../controllers/users.controllers";
 
 // Instantiation du routeur
@@ -28,6 +28,9 @@ router.put("/:id", updateController);
 
 // Route to delete a product
 router.delete("/:id", deleteController);
+
+// Route to login
+router.post("/login", login);
 
 // middleware pour gérer les erreurs
 router.use((err: Error, req: Request, res: Response, next: NextFunction) => {

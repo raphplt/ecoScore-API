@@ -26,13 +26,21 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  tags: {
+    type: Array<String>,
+    required: false,
+  },
+  trendScore: {
+    type: Number,
+    required: false,
+  },
   image: {
     type: String,
-    required: true,
+    required: false,
   },
   scoreRecycled: {
     type: Boolean,
-    required: true,
+    required: false,
   },
   scoreEnergy: {
     type: Number,
@@ -40,11 +48,11 @@ const productSchema = new mongoose.Schema({
   },
   scoreCarbon: {
     type: Number,
-    required: true,
+    required: false,
   },
   scoreRepair: {
     type: Number,
-    required: true,
+    required: false,
   },
 });
 

@@ -1,6 +1,22 @@
 import { Request, Response } from "express";
 import User from "../models/users.model";
-import { createUser, deleteUser, updateUser } from "../services/user.services";
+import {
+  createUser,
+  deleteUser,
+  updateUser,
+  loginUser,
+  registerUser,
+} from "../services/user.services";
+
+export async function login(req: Request, res: Response) {
+  try {
+    const result = await loginUser(req);
+    res.send(result);
+    // return result;
+  } catch (error) {
+    res.send(false);
+  }
+}
 
 export async function getAllController(req: Request, res: Response) {
   try {
@@ -47,35 +63,10 @@ export async function deleteController(req: Request, res: Response) {
 export async function search(req: Request, res: Response) {
   const { query } = req.query;
 
-  // Effectue une recherche dans la base de données en fonction des critères spécifiés
   const results = await User.find({
     $or: [{ title: query }, { type: query }],
   });
 
-  // Renvoie les résultats de la recherche au client
   res.json(results);
 }
 
-// permet chercher un objet dans la table Products en fonction de son Id
-// export async function getById(req: Request, res: Response) {
-//   try {
-//     // console.log('1')
-//     const findOne = await Products.find({ title: req.body.title }).exec();
-//     if (findOne === null) {
-//       // console.log('2')
-//       return res.status(404);
-//     } else {
-//       // console.log('3')
-//       return res.send(findOne);
-//     }
-//   } catch (error) {
-//     console.log('4')
-//     return res.status(404).send(error);
-//   }
-// }
-
-//  suprime un objet dans la table products
-//export async function deleteById(req: Request, res: Response) {
-//const query = await deleteProduct(req);
-//if (query === false) { res.sendStatus(400); } else { res.sendStatus(200); }
-//}

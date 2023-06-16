@@ -4,25 +4,27 @@ import { Request } from "express";
 
 //Service to create a new User
 export const createUser = async (req: Request) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, role } = req.body;
 
   const userModelInterface = new User({
     username,
     email,
     password,
+    role,
   });
   return await userModelInterface.save();
 };
 
 // Service pour mettre à jour un user de la table [User] par id
 export const updateUser = async (req: Request) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, role } = req.body;
   const update = await User.updateOne(
     { _id: req.params.id },
     {
       username,
       email,
       password,
+      role,
     }
   ).catch(() => false);
   return update;
@@ -34,4 +36,33 @@ export const deleteUser = async (req: Request) => {
     () => false
   );
   return findOne;
+};
+
+// Service for login
+export const loginUser = async (req: Request) => {
+  const { email, password } = req.body;
+  const findOne: any = await User.findOne({ email, password }).catch(
+    () => false
+  );
+  let userInfos = null;
+  if (findOne) {
+    userInfos = {
+      email: findOne?.email,
+      username: findOne?.username,
+      role: findOne?.role,
+    };
+  }
+  return userInfos;
+};
+
+// Service for register
+export const registerUser = async (req: Request) => {
+  const { username, email, password, role } = req.body;
+  const userModelInterface = new User({
+    username,
+    email,
+    password,
+    role,
+  });
+  return await userModelInterface.save();
 };

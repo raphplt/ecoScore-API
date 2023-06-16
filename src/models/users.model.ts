@@ -8,13 +8,10 @@ interface userModelInterface extends mongoose.Model<UsersDoc> {
 
 // Interface for the document
 interface UsersDoc extends mongoose.Document {
-  title: string;
-  type: string;
-  image: string;
-  scoreRecycled: boolean;
-  scoreEnergy: number;
-  scoreCarbon: number;
-  scoreRepair: number;
+  username: string;
+  email: string;
+  password: string;
+  role: string;
 }
 
 const userSchema = new mongoose.Schema({
@@ -27,6 +24,10 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   password: {
+    type: String,
+    required: true,
+  },
+  role: {
     type: String,
     required: true,
   },

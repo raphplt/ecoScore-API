@@ -61,17 +61,13 @@ export async function search(req: Request, res: Response) {
 // permet chercher un objet dans la table Products en fonction de son Id
 // export async function getById(req: Request, res: Response) {
 //   try {
-//     // console.log('1')
 //     const findOne = await Products.find({ title: req.body.title }).exec();
 //     if (findOne === null) {
-//       // console.log('2')
 //       return res.status(404);
 //     } else {
-//       // console.log('3')
 //       return res.send(findOne);
 //     }
 //   } catch (error) {
-//     console.log('4')
 //     return res.status(404).send(error);
 //   }
 // }

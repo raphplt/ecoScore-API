@@ -15,7 +15,7 @@ const router = express.Router();
 router.get("/", getAllController);
 
 // Route to get by Id
-// router.get("/:id", getById);
+// router.get("/:id", getById); 
 
 // Test route to search
 router.get("/search", search);

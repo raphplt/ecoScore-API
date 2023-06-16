@@ -56,7 +56,11 @@ export async function search(req: Request, res: Response) {
 
   // Effectue une recherche dans la base de données en fonction des critères spécifiés
   const results = await Products.find({
-    $or: [{ title: { $regex: regex } }, { type: { $regex: regex } }],
+    $or: [
+      { title: { $regex: regex } },
+      { type: { $regex: regex } },
+      { tags: { $elemMatch: { $regex: regex } } },
+    ],
   });
 
   // Renvoie les résultats de la recherche au client
@@ -67,17 +71,13 @@ export async function search(req: Request, res: Response) {
 // permet chercher un objet dans la table Products en fonction de son Id
 // export async function getById(req: Request, res: Response) {
 //   try {
-//     // console.log('1')
 //     const findOne = await Products.find({ title: req.body.title }).exec();
 //     if (findOne === null) {
-//       // console.log('2')
 //       return res.status(404);
 //     } else {
-//       // console.log('3')
 //       return res.send(findOne);
 //     }
 //   } catch (error) {
-//     console.log('4')
 //     return res.status(404).send(error);
 //   }
 // }

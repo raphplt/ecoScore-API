@@ -7,6 +7,8 @@ export const createProduct = async (req: Request) => {
   const {
     title,
     type,
+    tags,
+    trendScore,
     image,
     scoreRecycled,
     scoreEnergy,
@@ -14,9 +16,11 @@ export const createProduct = async (req: Request) => {
     scoreRepair,
   } = req.body;
 
-  const productModelInterface: Iproducts = new Products({
+  const productModelInterface: any = new Products({
     title,
     type,
+    tags,
+    trendScore,
     image,
     scoreRecycled,
     scoreEnergy,
@@ -31,22 +35,28 @@ export const updateProduct = async (req: Request) => {
   const {
     title,
     type,
+    tags,
+    trendScore,
     image,
     scoreRecycled,
     scoreEnergy,
     scoreCarbon,
     scoreRepair,
   } = req.body;
-  const update = await Products.updateOne({ _id : req.params.id },{
-    title,
-    type,
-    image,
-    scoreRecycled,
-    scoreEnergy,
-    scoreCarbon,
-    scoreRepair,
-  })
-  .catch(() => false);
+  const update = await Products.updateOne(
+    { _id: req.params.id },
+    {
+      title,
+      type,
+      tags,
+      trendScore,
+      image,
+      scoreRecycled,
+      scoreEnergy,
+      scoreCarbon,
+      scoreRepair,
+    }
+  ).catch(() => false);
   return update;
 };
 
