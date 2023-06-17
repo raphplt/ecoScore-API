@@ -70,3 +70,9 @@ export async function search(req: Request, res: Response) {
   res.json(results);
 }
 
+
+export const checkEmail = async (req: Request, res: Response) => {
+  const email = req.body.email;
+  const result = await User.findOne({ email }).catch(() => false);
+  res.send(result ? true : false);
+};

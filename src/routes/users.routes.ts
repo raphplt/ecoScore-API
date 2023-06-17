@@ -6,33 +6,25 @@ import {
   deleteController,
   search,
   login,
+  checkEmail,
 } from "../controllers/users.controllers";
 
-// Instantiation du routeur
 const router = express.Router();
 
-// Route to get all products
 router.get("/", getAllController);
 
-// Route to get by Id
-// router.get("/:id", getById);
-
-// Test route to search
 router.get("/search", search);
 
-// Route to create a product
-router.post("/", createController);
+router.post("/register", createController);
 
-// Route to update a product
 router.put("/:id", updateController);
 
-// Route to delete a product
 router.delete("/:id", deleteController);
 
-// Route to login
 router.post("/login", login);
 
-// middleware pour gérer les erreurs
+router.post("/checkEmail", checkEmail);
+
 router.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
   return res.status(500).send("Erreur serveur");

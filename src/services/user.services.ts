@@ -5,7 +5,7 @@ import { Request } from "express";
 //Service to create a new User
 export const createUser = async (req: Request) => {
   const { username, email, password, role } = req.body;
-
+  console.log(req.body);
   const userModelInterface = new User({
     username,
     email,
