@@ -4,4 +4,5 @@ export default interface Iusers {
   email: string;
   password: string;
   role: string;
+  trendProducts: Array<number>;
 }

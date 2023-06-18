@@ -12,6 +12,7 @@ interface UsersDoc extends mongoose.Document {
   email: string;
   password: string;
   role: string;
+  trendProducts: Array<string>;
 }
 
 const userSchema = new mongoose.Schema({
@@ -30,6 +31,10 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     required: true,
+  },
+  trendProducts: {
+    type: Array,
+    required: false,
   },
 });
 

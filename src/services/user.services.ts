@@ -4,20 +4,20 @@ import { Request } from "express";
 
 //Service to create a new User
 export const createUser = async (req: Request) => {
-  const { username, email, password, role } = req.body;
-  console.log(req.body);
+  const { username, email, password, role, trendProducts } = req.body;
   const userModelInterface = new User({
     username,
     email,
     password,
     role,
+    trendProducts,
   });
   return await userModelInterface.save();
 };
 
 // Service pour mettre à jour un user de la table [User] par id
 export const updateUser = async (req: Request) => {
-  const { username, email, password, role } = req.body;
+  const { username, email, password, role, trendProducts } = req.body;
   const update = await User.updateOne(
     { _id: req.params.id },
     {
@@ -25,6 +25,7 @@ export const updateUser = async (req: Request) => {
       email,
       password,
       role,
+      trendProducts,
     }
   ).catch(() => false);
   return update;
@@ -47,9 +48,11 @@ export const loginUser = async (req: Request) => {
   let userInfos = null;
   if (findOne) {
     userInfos = {
+      id: findOne?._id,
       email: findOne?.email,
       username: findOne?.username,
       role: findOne?.role,
+      trendProducts: findOne?.trendProducts,
     };
   }
   return userInfos;
@@ -57,12 +60,13 @@ export const loginUser = async (req: Request) => {
 
 // Service for register
 export const registerUser = async (req: Request) => {
-  const { username, email, password, role } = req.body;
+  const { username, email, password, role, trendProducts } = req.body;
   const userModelInterface = new User({
     username,
     email,
     password,
     role,
+    trendProducts,
   });
   return await userModelInterface.save();
 };

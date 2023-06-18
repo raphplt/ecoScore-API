@@ -7,6 +7,7 @@ import {
   search,
   login,
   checkEmail,
+  addProductToTrend,
 } from "../controllers/users.controllers";
 
 const router = express.Router();
@@ -17,13 +18,14 @@ router.get("/search", search);
 
 router.post("/register", createController);
 
-router.put("/:id", updateController);
+router.put("/addTrendProduct", addProductToTrend);
 
 router.delete("/:id", deleteController);
 
 router.post("/login", login);
 
 router.post("/checkEmail", checkEmail);
+
 
 router.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);

@@ -7,12 +7,12 @@ import {
   loginUser,
   registerUser,
 } from "../services/user.services";
+import Product from "../models/products.model";
 
 export async function login(req: Request, res: Response) {
   try {
     const result = await loginUser(req);
     res.send(result);
-    // return result;
   } catch (error) {
     res.send(false);
   }
@@ -70,9 +70,27 @@ export async function search(req: Request, res: Response) {
   res.json(results);
 }
 
-
 export const checkEmail = async (req: Request, res: Response) => {
   const email = req.body.email;
   const result = await User.findOne({ email }).catch(() => false);
+  res.send(result ? true : false);
+};
+
+export const addProductToTrend = async (req: Request, res: Response) => {
+  const { id, productId } = req.body;
+  const findOne: any = await User.findOne({ _id: id });
+  const products = findOne.trendProducts;
+  if (products.includes(productId)) {
+    res.send(false);
+    return;
+  }
+  const result = await User.updateOne(
+    { _id: id },
+    { $push: { trendProducts: productId } }
+  ).catch(() => false);
+  await Product.updateOne(
+    { _id: productId },
+    { $inc: { trendScore: 1 } }
+  ).catch(() => false);
   res.send(result ? true : false);
 };
