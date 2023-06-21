@@ -20,16 +20,12 @@ export async function getAllController(req: Request, res: Response) {
 }
 
 export async function getById(req: Request, res: Response) {
-  try {
-    const _id = req.params.id;
-    const findOne = await Products.findOne({ _id });
-    if (!findOne) {
-      res.status(404).send("No product found.");
-    } else {
-      res.send(findOne);
-    }
-  } catch (error) {
-    return res.status(404).send(error);
+  const _id = req.params.id;
+  const findOne = await Products.findOne({ _id });
+  if (!findOne) {
+    res.status(200).send("No product found.");
+  } else {
+    res.send(findOne);
   }
 }
 

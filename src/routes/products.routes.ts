@@ -15,11 +15,12 @@ const router = express.Router();
 // Route to get all products
 router.get("/", getAllController);
 
+// Test route to search
+router.get("/search", search);
+
 // Route to get by Id
 router.get("/:id", getById); 
 
-// Test route to search
-router.get("/search", search);
 
 // Route to create a product
 router.post("/", createController);
