@@ -33,7 +33,7 @@ app.use(
   })
 );
 
-// Route produits
+// Route produitss
 app.use("/products", productsRouter);
 
 // Route categories
