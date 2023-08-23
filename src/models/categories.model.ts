@@ -8,24 +8,29 @@ interface categoryModelInterface extends mongoose.Model<CategoriesDoc> {
 
 // Interface for the document
 interface CategoriesDoc extends mongoose.Document {
-  cat: string;
-  subCat: Array<string>;
+  category: string;
+  slug: string;
+  subCats: Array<string>;
   image: string;
 }
 
 const categorySchema = new mongoose.Schema({
-  cat: {
+  category: {
     type: String,
     required: true,
   },
-  subCat: {
+  slug: {
+    type: String,
+    required: true,
+  },
+  subCats: {
     type: Array<string>,
     required: true,
   },
   image: {
     type: String,
     required: false,
-  }
+  },
 });
 
 categorySchema.statics.build = (attr: Icategories) => {

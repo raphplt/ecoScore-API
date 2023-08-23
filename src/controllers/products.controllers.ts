@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import e, { Request, Response } from "express";
 import Products from "../models/products.model";
 import {
   createProduct,
@@ -80,3 +80,11 @@ export async function search(req: Request, res: Response) {
   res.json(results);
 }
 
+export async function getProductsByCategory(req: Request, res: Response) {
+  const { category }: any = req.query;
+
+  const results = await Products.find({
+    type: category,
+  });
+  res.json(results);
+}

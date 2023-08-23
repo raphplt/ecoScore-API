@@ -6,6 +6,7 @@ import {
   deleteController,
   search,
   getById,
+  getProductsByCategory,
   // getById,
 } from "../controllers/products.controllers";
 
@@ -19,8 +20,7 @@ router.get("/", getAllController);
 router.get("/search", search);
 
 // Route to get by Id
-router.get("/:id", getById); 
-
+router.get("/:id", getById);
 
 // Route to create a product
 router.post("/", createController);
@@ -30,6 +30,9 @@ router.put("/:id", updateController);
 
 // Route to delete a product
 router.delete("/:id", deleteController);
+
+// Route to get product by category
+router.get("/category/:category", getProductsByCategory);
 
 // middleware pour gérer les erreurs
 router.use((err: Error, req: Request, res: Response, next: NextFunction) => {
