@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 import { Request, Response } from "express";
 import User from "../models/users.model";
 import {
@@ -94,3 +95,64 @@ export const addProductToTrend = async (req: Request, res: Response) => {
   ).catch(() => false);
   res.send(result ? true : false);
 };
+
+
+// Fonction pour changer le mot de passe de l'utilisateur
+export const changePassword = async (req: Request, res: Response) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+    const user: any = await User.findById(req.body.id);
+
+    // Vérifier si l'utilisateur existe
+    if (!user) {
+      return res.status(404).json({ message: 'Utilisateur introuvable' });
+    }
+
+    // Permet de modifier un mot de passe si le mot de passe n'est pas encrypter 
+    if (currentPassword != user.password) {
+      // a decommenter si le mdp pas crypter
+      //return res.status(401).json({ message: 'Mot de passe actuel incorrect' });
+    }
+    else {
+      console.log(currentPassword)
+      console.log(user.password)
+    }
+
+    // verif si le mot de passe actuelle correspond 
+    const isPasswordValid = await bcrypt.compare(currentPassword, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: 'Mot de passe actuel incorrect' });
+    }
+
+    // Hasher et enregistrer le nouveau mot de passe
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedPassword;
+    await user.save();
+
+    res.status(200).json({ message: 'Mot de passe changé avec succès' });
+  } catch (error) {
+    console.error('Erreur lors du changement de mot de passe :', error);
+    res.status(500).json({ message: 'Une erreur est survenue lors du changement de mot de passe' });
+  }
+};
+
+// Fonction pour changer le nom d'utilisateur de l'utilisateur
+export const changeUsername = async (req: Request, res: Response) => {
+  try {
+    const { newUsername } = req.body;
+    const user: any = await User.findById(req.params.id);
+
+    if (!user) {
+      return res.status(404).json({ message: 'Utilisateur introuvable' });
+    }
+
+    user.username = newUsername;
+    await user.save();
+
+    res.status(200).json({ message: 'Nom d\'utilisateur changé avec succès' });
+  } catch (error) {
+    console.error('Erreur lors du changement de nom d\'utilisateur :', error);
+    res.status(500).json({ message: 'Une erreur est survenue lors du changement de nom d\'utilisateur' });
+  }
+};
+

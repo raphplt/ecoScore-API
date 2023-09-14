@@ -8,6 +8,8 @@ import {
   login,
   checkEmail,
   addProductToTrend,
+  changePassword,
+  changeUsername,
 } from "../controllers/users.controllers";
 
 const router = express.Router();
@@ -26,6 +28,9 @@ router.post("/login", login);
 
 router.post("/checkEmail", checkEmail);
 
+router.post("/updatepassword", changePassword)
+
+router.post("/:id/updateusername", changeUsername)
 
 router.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
