@@ -20,7 +20,11 @@ export async function getAllController(req: Request, res: Response) {
 }
 
 export async function getById(req: Request, res: Response) {
-  const _id = req.params.id;
+  let _id = req.params.id;
+  if (_id === "undefined") {
+    res.status(200).send("No id provided.");
+    return;
+  }
   const findOne = await Products.findOne({ _id });
   if (!findOne) {
     res.status(200).send("No product found.");
@@ -72,7 +76,15 @@ export async function search(req: Request, res: Response) {
       { tags: { $elemMatch: { $regex: regex } } },
     ],
   });
-
   // Renvoie les résultats de la recherche au client
+  res.json(results);
+}
+
+export async function getProductsByCategory(req: Request, res: Response) {
+  const { category }: any = req.query;
+
+  const results = await Products.find({
+    type: category,
+  });
   res.json(results);
 }

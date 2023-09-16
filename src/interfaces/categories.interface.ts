@@ -1,6 +1,7 @@
 export default interface Icategories {
   save: any;
-  cat: string;
-  subCat: Array<String>;
+  category: string;
+  slug: string;
+  subCats: Array<String>;
   image: string;
 }

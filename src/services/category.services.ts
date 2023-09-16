@@ -3,33 +3,35 @@ import Icategories from "../interfaces/categories.interface";
 import Categories from "../models/categories.model";
 import Category from "../models/categories.model";
 
-//Service to create a new product
+//Service to create a new category in [Category] table
 export const createCategory = async (req: Request) => {
-  const { cat, subCat, image } = req.body;
+  const { category, slug, subCats, image } = req.body;
 
   const categoryModelInterface = new Category({
-    cat,
-    subCat,
-    image
+    category,
+    slug,
+    subCats,
+    image,
   });
   return await categoryModelInterface.save();
 };
 
-// Service pour mettre à jour un produit de la table [Product] par id
+// Service to update a category of [Category] table by id
 export const updateCategory = async (req: Request) => {
-  const { cat, subCat, image } = req.body;
+  const { category, slug, subCats, image } = req.body;
   const update = await Categories.updateOne(
     { _id: req.params.id },
     {
-      cat,
-      subCat,
-      image
+      category,
+      slug,
+      subCats,
+      image,
     }
   ).catch(() => false);
   return update;
 };
 
-// Service to delete a product of [Product] table by id
+// Service to delete a category of [Category] table by id
 export const deleteCategory = async (req: Request) => {
   const findOne = await Categories.findByIdAndDelete(req.params.id).catch(
     () => false

@@ -4,6 +4,7 @@ import { json } from "body-parser";
 import { productsRouter } from "./routes/products.routes";
 import { categoriesRouter } from "./routes/categories.routes";
 import { usersRouter } from "./routes/users.routes";
+import { quizzRouter } from "./routes/quizz.routes";
 const cookieSession = require("cookie-session");
 
 const cors = require("cors");
@@ -27,13 +28,10 @@ app.use(
   cookieSession({
     name: "session",
     secret: "secret", // A changer pour une variable d'environnement
-    // maxAge: 24 * 60 * 60 * 1000, // 24 hours
-    // httpOnly: true,
-    // secure: false,
   })
 );
 
-// Route produits
+// Route produitss
 app.use("/products", productsRouter);
 
 // Route categories
@@ -41,6 +39,9 @@ app.use("/categories", categoriesRouter);
 
 // Route users
 app.use("/users", usersRouter);
+
+// Route quizz
+app.use("/quizz", quizzRouter);
 
 mongoose.connect("mongodb://0.0.0.0:27017/ecoscoredb").then(
   () => {
