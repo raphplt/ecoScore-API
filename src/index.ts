@@ -9,7 +9,7 @@ const cookieSession = require("cookie-session");
 
 const cors = require("cors");
 
-const app = express();
+export const app = express();
 
 app.use(json());
 
