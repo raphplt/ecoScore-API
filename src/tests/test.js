@@ -1,6 +1,5 @@
-const request = require("supertest");
-const express = require("express");
-const app = express();
+import request from "supertest";
+import { app } from "../index";
 
 describe("Tests pour les routes de l'API", () => {
   beforeEach(() => {});
@@ -9,7 +8,7 @@ describe("Tests pour les routes de l'API", () => {
 
   it("Devrait obtenir tous les produits", (done) => {
     request(app)
-      .get("/api/products")
+      .get("/products")
       .expect(200)
       .expect("Content-Type", /json/)
       .end((err, res) => {
@@ -23,7 +22,7 @@ describe("Tests pour les routes de l'API", () => {
     const productId = "votre_id_de_test_valide";
 
     request(app)
-      .get(`/api/products/${productId}`)
+      .get(`/products/${productId}`)
       .expect(200)
       .expect("Content-Type", /json/)
       .end((err, res) => {
